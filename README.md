@@ -39,3 +39,41 @@ You can read more about GeckoView on the [wiki](https://wiki.mozilla.org/Mobile/
 [10]:https://github.com/mozilla/geckoview/issues
 [11]:https://bugzilla.mozilla.org/enter_bug.cgi?product=GeckoView
 [12]:https://geckoview.dev/javadoc/mozilla-central/index.html
+
+
+# For quick usage :
+```
+//Add repository from mozilla
+repositories {
+    maven {
+        url "https://maven.mozilla.org/maven2/"
+    }
+}
+//Add compile options
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+}
+//Add dependency
+dependencies {
+    // ...
+  implementation "org.mozilla.geckoview:geckoview-${geckoviewChannel}:${geckoviewVersion}"
+}
+//In XML
+<org.mozilla.geckoview.GeckoView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/geckoview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" />
+//In Java import
+import org.mozilla.geckoview.GeckoRuntime;
+import org.mozilla.geckoview.GeckoSession;
+import org.mozilla.geckoview.GeckoView;
+GeckoView view = findViewById(R.id.geckoview);
+GeckoSession session = new GeckoSession();
+GeckoRuntime runtime = GeckoRuntime.create(this);
+//In Java
+session.open(runtime);
+view.setSession(session);
+session.loadUri("about:buildconfig"); // Or any other URL...
+```
